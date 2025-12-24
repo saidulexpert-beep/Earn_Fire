@@ -409,17 +409,17 @@
                         <div class="p-3 bg-blue-50 rounded-full"><i data-lucide="wallet" class="w-5 h-5 text-blue-600"></i></div>
                         <span class="text-xs font-semibold text-gray-600">Deposit</span>
                     </button>
-                    <button class="action-btn" onclick="navigateTo('mail-page')">
-                        <div class="p-3 bg-purple-50 rounded-full"><i data-lucide="shopping-cart" class="w-5 h-5 text-purple-600"></i></div>
-                        <span class="text-xs font-semibold text-gray-600">Shop</span>
+                    <button class="action-btn" onclick="navigateTo('withdraw-page')">
+                        <div class="p-3 bg-indigo-50 rounded-full"><i data-lucide="arrow-up-circle" class="w-5 h-5 text-indigo-600"></i></div>
+                        <span class="text-xs font-semibold text-gray-600">Withdraw</span>
                     </button>
                     <button class="action-btn" onclick="navigateTo('offer-page')">
                         <div class="p-3 bg-pink-50 rounded-full"><i data-lucide="gift" class="w-5 h-5 text-pink-600"></i></div>
                         <span class="text-xs font-semibold text-gray-600">Earn</span>
                     </button>
-                    <button class="action-btn" onclick="toggleMenu()">
-                        <div class="p-3 bg-green-50 rounded-full"><i data-lucide="headphones" class="w-5 h-5 text-green-600"></i></div>
-                        <span class="text-xs font-semibold text-gray-600">Help</span>
+                    <button class="action-btn" onclick="navigateTo('mail-page')">
+                        <div class="p-3 bg-purple-50 rounded-full"><i data-lucide="shopping-cart" class="w-5 h-5 text-purple-600"></i></div>
+                        <span class="text-xs font-semibold text-gray-600">Shop</span>
                     </button>
                 </div>
             </div>
@@ -463,7 +463,7 @@
                                 </div>
                                 <div>
                                     <h4 class="font-bold text-sm text-gray-800">ACCOUNT SELL</h4>
-                                    <p class="text-[10px] text-gray-500">Gmail, FB, 2FA Accounts</p>
+                                    <p class="text-[10px] text-gray-500">Gmail, FB, Insta Accounts</p>
                                 </div>
                             </div>
                             <button class="sell-btn-action">SELL</button>
@@ -543,19 +543,48 @@
                             </div>
                         </div>
 
-                        <!-- ACCOUNT SELL FORM -->
-                        <div id="form-account-sell" class="hidden space-y-4 card-bg p-5">
-                            <div class="text-center mb-4">
-                                <div class="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-2 text-blue-600"><i data-lucide="user-check" class="w-6 h-6"></i></div>
-                                <h3 class="font-bold text-lg text-gray-800">Account Sell</h3>
-                                <p class="text-[10px] text-gray-500">Admin will verify and add balance.</p>
+                        <!-- ACCOUNT SELL FORM (UPDATED TO MATCH COIN SELL STYLE) -->
+                        <div id="form-account-sell" class="hidden card-bg overflow-hidden border-0 shadow-xl">
+                            <!-- 1. Profile/Header Style -->
+                            <div class="bg-gradient-to-br from-indigo-900 to-blue-800 p-6 text-center relative">
+                                <div class="w-16 h-16 mx-auto bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border-2 border-blue-400/50 mb-2 shadow-lg">
+                                    <i data-lucide="user-check" class="w-8 h-8 text-blue-300"></i>
+                                </div>
+                                <h3 class="text-xl font-black text-white tracking-wider font-orbitron">ACCOUNT TRADING</h3>
+                                <p class="text-[10px] text-blue-200 font-medium">Verified Account Sell</p>
                             </div>
-                            <div class="space-y-3">
-                                <input id="acc-email" type="text" placeholder="Email ID or Username" class="w-full p-3 rounded-xl input-field text-sm">
-                                <input id="acc-pass" type="text" placeholder="Password" class="w-full p-3 rounded-xl input-field text-sm font-mono">
-                                <input id="acc-recovery" type="text" placeholder="Recovery Email or 2FA Key" class="w-full p-3 rounded-xl input-field text-sm font-mono">
-                                <input id="acc-price" type="number" placeholder="Asking Price (৳)" class="w-full p-3 rounded-xl input-field text-sm">
-                                <button onclick="submitAccountSell()" class="w-full p-3 rounded-xl btn-gradient text-sm uppercase">Submit Account</button>
+
+                            <div class="p-5 space-y-5">
+                                
+                                <!-- Select & Rate Side-by-Side -->
+                                <div class="flex gap-3 items-center">
+                                    <div class="flex-1">
+                                        <label class="text-[10px] font-bold text-gray-400 uppercase ml-1 mb-1 block">Select Account</label>
+                                        <div class="relative">
+                                            <select id="acc-type-select" onchange="updateAccountDetails()" class="w-full p-3 pl-3 rounded-xl bg-gray-50 border border-gray-200 text-sm font-bold appearance-none focus:outline-none focus:border-blue-400 transition-colors cursor-pointer">
+                                                <option value="FACEBOOK">FACEBOOK</option>
+                                                <option value="GMAIL">GMAIL</option>
+                                                <option value="INSTAGRAM">INSTAGRAM</option>
+                                            </select>
+                                            <i data-lucide="chevron-down" class="w-4 h-4 text-gray-400 absolute right-3 top-3.5 pointer-events-none"></i>
+                                        </div>
+                                    </div>
+                                    <div class="shrink-0 pt-5">
+                                        <div id="acc-rate-display" class="bg-gray-900 text-blue-300 px-4 py-3 rounded-xl font-mono text-xs font-bold border border-gray-800 shadow-lg min-w-[100px] text-center">
+                                            1 ID = 15৳
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-3">
+                                    <input id="acc-email" type="text" placeholder="Email ID or Username" class="w-full p-3 rounded-xl input-field text-sm font-semibold">
+                                    <input id="acc-pass" type="text" placeholder="Password" class="w-full p-3 rounded-xl input-field text-sm font-mono">
+                                    <input id="acc-recovery" type="text" placeholder="Recovery Email or 2FA Key" class="w-full p-3 rounded-xl input-field text-sm font-mono">
+                                </div>
+
+                                <button onclick="submitAccountSell()" class="w-full py-3.5 rounded-xl btn-gradient text-sm uppercase font-bold tracking-wide shadow-lg mt-2">
+                                    Submit Account
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -626,6 +655,46 @@
                     </div>
                 </div>
                 <div class="mt-6"><h3 class="text-lg font-bold mb-3 px-1">Recent Transactions</h3><div id="payment-history-list" class="space-y-3"></div></div>
+            </div>
+
+            <!-- =========== WITHDRAW PAGE =========== -->
+            <div id="withdraw-page" class="space-y-6 sub-page">
+                <div class="relative flex items-center justify-center mb-4 pt-2">
+                    <button onclick="navigateTo('home-page')" class="absolute left-0 p-2 rounded-full hover:bg-gray-100 transition-colors">
+                        <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
+                    </button>
+                    <h2 class="text-xl font-bold text-center text-gray-800">Withdraw</h2>
+                </div>
+                <div class="card-bg p-5 space-y-5">
+                    <div class="text-center p-2 bg-indigo-50 rounded-lg border border-indigo-100 mb-2">
+                         <p class="text-xs text-indigo-600 font-bold">Minimum: 50৳ | Fee: 10৳</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 mb-1 ml-1">METHOD</label>
+                            <select id="withdraw-method" class="w-full p-3 rounded-xl input-field text-sm font-semibold">
+                                <option value="">Select Method</option>
+                                <option value="Nagad">Nagad</option>
+                                <option value="bKash">bKash</option>
+                                <option value="Rocket">Rocket</option>
+                                <option value="Binance">Binance</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 mb-1 ml-1">ACCOUNT NUMBER</label>
+                            <input id="withdraw-number" type="text" placeholder="017xxxxxxxx" class="w-full p-3 rounded-xl input-field text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 mb-1 ml-1">AMOUNT</label>
+                            <input id="withdraw-amount" type="number" placeholder="Min 50" class="w-full p-3 rounded-xl input-field text-sm">
+                        </div>
+                        <button id="withdraw-btn" onclick="handleWithdrawRequest()" class="w-full p-3 rounded-xl btn-gradient text-sm uppercase font-bold tracking-wide">Withdraw Now</button>
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <h3 class="text-lg font-bold mb-3 px-1">Withdraw History</h3>
+                    <div id="withdraw-history-list" class="space-y-3"></div>
+                </div>
             </div>
 
             <!-- =========== MAIL PAGE (SHOP) =========== -->
@@ -936,11 +1005,17 @@
         let appConfig = {};
         let insufficientBalanceInterval = null;
 
-        // Coin Configuration
+        // Configuration for Coin and Account Sells
+        // NOTE: These are static defaults. Admin can change logic to fetch from Firebase config/main
         const sellConfig = {
-            'NAVA': { rate: 10, min: 500 },
-            'APP': { rate: 15, min: 500 },
-            'NS': { rate: 8, min: 500 }
+            // Coins
+            'NAVA': { rate: 10, min: 500, type: 'coin' },
+            'APP': { rate: 15, min: 500, type: 'coin' },
+            'NS': { rate: 8, min: 500, type: 'coin' },
+            // Accounts
+            'FACEBOOK': { rate: 15, type: 'account' },
+            'GMAIL': { rate: 10, type: 'account' },
+            'INSTAGRAM': { rate: 12, type: 'account' }
         };
 
         const loader = document.getElementById('loader');
@@ -1170,13 +1245,14 @@
             const pageLoadFunctions = {
                 'home-page': () => {},
                 'pay-page': loadPaymentHistory,
+                'withdraw-page': loadWithdrawHistory,
                 'mail-page': loadMailStore,
                 'updates-page': () => { loadUpdates(); loadReviews(); },
                 'admin-page': () => { populateAdminMailTypes(); loadReplaceRequests(); loadAdminSellRequests(); },
                 'profile-page': loadProfilePage,
                 'features-page': loadFeaturesPage,
                 'tutorial-page': loadTutorials,
-                'offer-page': () => { loadSellHistory(); loadTasks(); updateCoinDetails(); },
+                'offer-page': () => { loadSellHistory(); loadTasks(); updateCoinDetails(); updateAccountDetails(); },
                 'send-page': () => { setupDynamicAmountHandlers('send'); },
                 'notification-page': showNotifications,
                 'report-history-page': loadReportHistory
@@ -1257,6 +1333,7 @@
                 updateCoinDetails();
             } else {
                 document.getElementById('form-account-sell').classList.remove('hidden');
+                updateAccountDetails();
             }
         }
 
@@ -1265,12 +1342,22 @@
             document.getElementById('sell-category-list').classList.remove('hidden');
         }
 
+        // Coin Logic
         window.updateCoinDetails = () => {
             const coin = document.getElementById('coin-type-select').value;
             const config = sellConfig[coin];
             if(config) {
                 document.getElementById('coin-rate-display').textContent = `1K = ${config.rate}৳`;
                 document.getElementById('admin-coin-id').textContent = DEFAULT_ADMIN_COIN_ID;
+            }
+        }
+        
+        // Account Logic
+        window.updateAccountDetails = () => {
+            const type = document.getElementById('acc-type-select').value;
+            const config = sellConfig[type];
+            if(config) {
+                 document.getElementById('acc-rate-display').textContent = `1 ID = ${config.rate}৳`;
             }
         }
 
@@ -1297,16 +1384,19 @@
         }
 
         window.submitAccountSell = async () => {
+            const type = document.getElementById('acc-type-select').value;
             const email = document.getElementById('acc-email').value;
             const pass = document.getElementById('acc-pass').value;
             const recovery = document.getElementById('acc-recovery').value;
-            const price = parseFloat(document.getElementById('acc-price').value);
+            
+            const config = sellConfig[type];
+            const price = config.rate;
 
-            if(!email || !pass || !price) return showAlert("Fill all fields.");
+            if(!email || !pass) return showAlert("Fill required fields.");
 
             const details = `E: ${email}\nP: ${pass}\nR/2FA: ${recovery}`;
             
-            await submitSellRequestGeneral("Account Sell", details, price, 'account');
+            await submitSellRequestGeneral(`${type} Account`, details, price, 'account');
         }
 
         async function submitSellRequestGeneral(product, details, price, category) {
@@ -1335,6 +1425,7 @@
         async function loadSellHistory() {
             const list = document.getElementById('sell-history-list');
             list.innerHTML = getLoadingHTML();
+            // Querying both Coin and Account sells (ordered by date)
             const q = query(collection(db, "sell_requests"), where("userId", "==", userData.tgChatId), orderBy("createdAt", "desc"));
             const snap = await getDocs(q);
             
@@ -1346,11 +1437,84 @@
             list.innerHTML = snap.docs.map(doc => {
                 const data = doc.data();
                 const color = data.status === 'approved' ? 'text-green-600' : (data.status === 'rejected' ? 'text-red-600' : 'text-yellow-600');
+                const categoryIcon = data.category === 'coin' ? 'coins' : 'user-check';
                 return `<div class="card-bg p-3 flex justify-between items-center">
-                    <div><p class="font-bold text-sm text-gray-800">${data.product}</p><p class="text-[10px] text-gray-500">${data.createdAt?.toDate().toLocaleDateString()}</p></div>
+                    <div class="flex items-center gap-3">
+                         <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i data-lucide="${categoryIcon}" class="w-4 h-4 text-gray-500"></i></div>
+                         <div><p class="font-bold text-sm text-gray-800">${data.product}</p><p class="text-[10px] text-gray-500">${data.createdAt?.toDate().toLocaleDateString()}</p></div>
+                    </div>
                     <div class="text-right"><p class="font-bold text-sm">৳${parseFloat(data.price).toFixed(2)}</p><p class="text-[10px] font-bold uppercase ${color}">${data.status}</p></div>
                 </div>`;
             }).join('');
+            lucide.createIcons();
+        }
+
+        // --- WITHDRAW LOGIC ---
+        async function handleWithdrawRequest() {
+            const method = document.getElementById('withdraw-method').value;
+            const number = document.getElementById('withdraw-number').value.trim();
+            const amount = parseFloat(document.getElementById('withdraw-amount').value);
+            
+            const minWithdraw = 50;
+            const fee = 10;
+            
+            if(!method || !number || !amount) return showAlert("Please fill all fields.");
+            if(amount < minWithdraw) return showAlert(`Minimum withdraw is ${minWithdraw}৳`);
+            
+            const totalDeduction = amount + fee;
+            if(userData.balance < totalDeduction) return showAlert("Insufficient Balance (Including 10৳ fee).");
+            
+            if(!confirm(`Withdraw ${amount}৳ to ${method}? Fee: ${fee}৳. Total: ${totalDeduction}৳`)) return;
+            
+            loader.style.display = 'flex';
+            try {
+                await runTransaction(db, async(t) => {
+                    const userRef = doc(db, "users", userData.tgChatId);
+                    const userSnap = await t.get(userRef);
+                    const currentBal = userSnap.data().balance;
+                    
+                    if(currentBal < totalDeduction) throw "Low Balance";
+                    
+                    t.update(userRef, { balance: currentBal - totalDeduction });
+                    const wRef = doc(collection(db, "withdrawals"));
+                    t.set(wRef, {
+                        userId: userData.tgChatId,
+                        userName: userData.name,
+                        method,
+                        number,
+                        amount,
+                        fee,
+                        totalDeduction,
+                        status: 'pending',
+                        requestedAt: serverTimestamp()
+                    });
+                });
+                userData.balance -= totalDeduction;
+                updateUI();
+                showAlert("Withdraw Request Submitted!");
+                loadWithdrawHistory();
+                ['withdraw-method', 'withdraw-number', 'withdraw-amount'].forEach(id => document.getElementById(id).value = '');
+            } catch(e) { showAlert(e === "Low Balance" ? "Insufficient Balance" : "Error submitting request."); }
+            finally { loader.style.display = 'none'; }
+        }
+
+        async function loadWithdrawHistory() {
+             const list = document.getElementById('withdraw-history-list');
+             list.innerHTML = getLoadingHTML();
+             const q = query(collection(db, "withdrawals"), where("userId", "==", userData.tgChatId), orderBy("requestedAt", "desc"));
+             const snap = await getDocs(q);
+             
+             if(snap.empty) {
+                 list.innerHTML = '<p class="text-center text-gray-400 text-xs">No history.</p>';
+                 return;
+             }
+             
+             list.innerHTML = snap.docs.map(doc => {
+                 const d = doc.data();
+                 const color = d.status === 'approved' ? 'text-green-600' : (d.status === 'rejected' ? 'text-red-600' : 'text-yellow-600');
+                 const displayStatus = d.status === 'approved' ? 'PAID' : d.status.toUpperCase();
+                 return `<div class="card-bg p-3 flex justify-between items-center"><div><p class="font-bold text-sm text-gray-800">Withdraw - ${d.method}</p><p class="text-[10px] text-gray-500">${d.requestedAt?.toDate().toLocaleDateString()}</p></div><div class="text-right"><p class="font-bold text-sm">৳${d.amount}</p><p class="text-[10px] font-bold ${color}">${displayStatus}</p></div></div>`;
+             }).join('');
         }
 
         // --- ADMIN SELL REQUESTS ---
