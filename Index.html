@@ -409,17 +409,17 @@
                         <div class="p-3 bg-blue-50 rounded-full"><i data-lucide="wallet" class="w-5 h-5 text-blue-600"></i></div>
                         <span class="text-xs font-semibold text-gray-600">Deposit</span>
                     </button>
-                    <button class="action-btn" onclick="navigateTo('withdraw-page')">
-                        <div class="p-3 bg-indigo-50 rounded-full"><i data-lucide="arrow-up-circle" class="w-5 h-5 text-indigo-600"></i></div>
-                        <span class="text-xs font-semibold text-gray-600">Withdraw</span>
+                    <button class="action-btn" onclick="navigateTo('mail-page')">
+                        <div class="p-3 bg-purple-50 rounded-full"><i data-lucide="shopping-cart" class="w-5 h-5 text-purple-600"></i></div>
+                        <span class="text-xs font-semibold text-gray-600">Shop</span>
                     </button>
                     <button class="action-btn" onclick="navigateTo('offer-page')">
                         <div class="p-3 bg-pink-50 rounded-full"><i data-lucide="gift" class="w-5 h-5 text-pink-600"></i></div>
                         <span class="text-xs font-semibold text-gray-600">Earn</span>
                     </button>
-                    <button class="action-btn" onclick="navigateTo('mail-page')">
-                        <div class="p-3 bg-purple-50 rounded-full"><i data-lucide="shopping-cart" class="w-5 h-5 text-purple-600"></i></div>
-                        <span class="text-xs font-semibold text-gray-600">Shop</span>
+                    <button class="action-btn" onclick="navigateTo('withdraw-page')">
+                        <div class="p-3 bg-indigo-50 rounded-full"><i data-lucide="arrow-up-right" class="w-5 h-5 text-indigo-600"></i></div>
+                        <span class="text-xs font-semibold text-gray-600">Withdraw</span>
                     </button>
                 </div>
             </div>
@@ -463,7 +463,7 @@
                                 </div>
                                 <div>
                                     <h4 class="font-bold text-sm text-gray-800">ACCOUNT SELL</h4>
-                                    <p class="text-[10px] text-gray-500">Gmail, FB, Insta Accounts</p>
+                                    <p class="text-[10px] text-gray-500">Facebook, Gmail, Instagram</p>
                                 </div>
                             </div>
                             <button class="sell-btn-action">SELL</button>
@@ -483,7 +483,6 @@
 
                         <!-- COIN SELL FORM (NEW ATTRACTIVE DESIGN) -->
                         <div id="form-coin-sell" class="hidden card-bg overflow-hidden border-0 shadow-xl">
-                            <!-- 1. Profile/Header Style -->
                             <div class="bg-gradient-to-br from-gray-900 to-gray-800 p-6 text-center relative">
                                 <div class="w-16 h-16 mx-auto bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border-2 border-yellow-500/50 mb-2 shadow-lg">
                                     <i data-lucide="coins" class="w-8 h-8 text-yellow-400"></i>
@@ -493,7 +492,6 @@
                             </div>
 
                             <div class="p-5 space-y-5">
-                                <!-- 2. Admin ID Copy -->
                                 <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-3 flex items-center justify-between shadow-sm">
                                     <div>
                                         <p class="text-[10px] text-yellow-700 font-bold uppercase tracking-wider mb-1">Send Coins To</p>
@@ -504,7 +502,6 @@
                                     </button>
                                 </div>
 
-                                <!-- 3. Select & Rate Side-by-Side -->
                                 <div class="flex gap-3 items-center">
                                     <div class="flex-1">
                                         <label class="text-[10px] font-bold text-gray-400 uppercase ml-1 mb-1 block">Select Coin</label>
@@ -524,7 +521,6 @@
                                     </div>
                                 </div>
 
-                                <!-- 4. Inputs -->
                                 <div class="space-y-3">
                                     <div>
                                         <label class="text-[10px] font-bold text-gray-400 uppercase ml-1 mb-1 block">Sent Amount</label>
@@ -536,27 +532,23 @@
                                     </div>
                                 </div>
 
-                                <!-- Submit -->
                                 <button onclick="submitCoinSell()" class="w-full py-3.5 rounded-xl btn-gradient text-sm uppercase font-bold tracking-wide shadow-lg mt-2">
                                     Submit Request
                                 </button>
                             </div>
                         </div>
 
-                        <!-- ACCOUNT SELL FORM (UPDATED TO MATCH COIN SELL STYLE) -->
+                        <!-- ACCOUNT SELL FORM (NEW ATTRACTIVE DESIGN) -->
                         <div id="form-account-sell" class="hidden card-bg overflow-hidden border-0 shadow-xl">
-                            <!-- 1. Profile/Header Style -->
-                            <div class="bg-gradient-to-br from-indigo-900 to-blue-800 p-6 text-center relative">
+                            <div class="bg-gradient-to-br from-blue-900 to-indigo-800 p-6 text-center relative">
                                 <div class="w-16 h-16 mx-auto bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border-2 border-blue-400/50 mb-2 shadow-lg">
-                                    <i data-lucide="user-check" class="w-8 h-8 text-blue-300"></i>
+                                    <i data-lucide="users-round" class="w-8 h-8 text-blue-200"></i>
                                 </div>
-                                <h3 class="text-xl font-black text-white tracking-wider font-orbitron">ACCOUNT TRADING</h3>
-                                <p class="text-[10px] text-blue-200 font-medium">Verified Account Sell</p>
+                                <h3 class="text-xl font-black text-white tracking-wider font-orbitron">ACCOUNT SELL</h3>
+                                <p class="text-[10px] text-blue-200 font-medium">Verify & Earn</p>
                             </div>
 
                             <div class="p-5 space-y-5">
-                                
-                                <!-- Select & Rate Side-by-Side -->
                                 <div class="flex gap-3 items-center">
                                     <div class="flex-1">
                                         <label class="text-[10px] font-bold text-gray-400 uppercase ml-1 mb-1 block">Select Account</label>
@@ -570,20 +562,22 @@
                                         </div>
                                     </div>
                                     <div class="shrink-0 pt-5">
-                                        <div id="acc-rate-display" class="bg-gray-900 text-blue-300 px-4 py-3 rounded-xl font-mono text-xs font-bold border border-gray-800 shadow-lg min-w-[100px] text-center">
-                                            1 ID = 15৳
+                                        <div id="acc-rate-display" class="bg-gray-900 text-blue-400 px-4 py-3 rounded-xl font-mono text-xs font-bold border border-gray-800 shadow-lg min-w-[100px] text-center">
+                                            1 ACC = ??৳
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="space-y-3">
-                                    <input id="acc-email" type="text" placeholder="Email ID or Username" class="w-full p-3 rounded-xl input-field text-sm font-semibold">
-                                    <input id="acc-pass" type="text" placeholder="Password" class="w-full p-3 rounded-xl input-field text-sm font-mono">
-                                    <input id="acc-recovery" type="text" placeholder="Recovery Email or 2FA Key" class="w-full p-3 rounded-xl input-field text-sm font-mono">
+                                    <div>
+                                        <label class="text-[10px] font-bold text-gray-400 uppercase ml-1 mb-1 block">Account Details</label>
+                                        <textarea id="acc-details" rows="4" placeholder="Email/Phone | Password | 2FA/Recovery" class="w-full p-3 rounded-xl input-field text-sm font-mono font-semibold"></textarea>
+                                        <p class="text-[10px] text-gray-400 mt-1 italic">Format: Email|Pass|2FA (One per line)</p>
+                                    </div>
                                 </div>
 
                                 <button onclick="submitAccountSell()" class="w-full py-3.5 rounded-xl btn-gradient text-sm uppercase font-bold tracking-wide shadow-lg mt-2">
-                                    Submit Account
+                                    Submit Request
                                 </button>
                             </div>
                         </div>
@@ -657,47 +651,51 @@
                 <div class="mt-6"><h3 class="text-lg font-bold mb-3 px-1">Recent Transactions</h3><div id="payment-history-list" class="space-y-3"></div></div>
             </div>
 
-            <!-- =========== WITHDRAW PAGE =========== -->
-            <div id="withdraw-page" class="space-y-6 sub-page">
+             <!-- =========== WITHDRAW PAGE =========== -->
+             <div id="withdraw-page" class="space-y-6 sub-page">
                 <div class="relative flex items-center justify-center mb-4 pt-2">
                     <button onclick="navigateTo('home-page')" class="absolute left-0 p-2 rounded-full hover:bg-gray-100 transition-colors">
                         <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
                     </button>
-                    <h2 class="text-xl font-bold text-center text-gray-800">Withdraw</h2>
+                    <h2 class="text-xl font-bold text-center text-gray-800">Withdraw Funds</h2>
                 </div>
                 <div class="card-bg p-5 space-y-5">
-                    <div class="text-center p-2 bg-indigo-50 rounded-lg border border-indigo-100 mb-2">
-                         <p class="text-xs text-indigo-600 font-bold">Minimum: 50৳ | Fee: 10৳</p>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-2 text-red-600 border border-red-100"><i data-lucide="arrow-up-circle" class="w-8 h-8"></i></div>
+                        <h3 class="font-bold text-lg text-gray-800">টাকা উত্তোলন</h3>
+                        <div class="flex justify-center gap-4 mt-2">
+                            <span class="text-xs bg-gray-100 px-2 py-1 rounded text-gray-600 font-bold">Min: 50৳</span>
+                            <span class="text-xs bg-red-100 px-2 py-1 rounded text-red-600 font-bold">Fee: 10৳</span>
+                        </div>
                     </div>
+
                     <div class="space-y-4">
                         <div>
                             <label class="block text-xs font-bold text-gray-500 mb-1 ml-1">METHOD</label>
-                            <select id="withdraw-method" class="w-full p-3 rounded-xl input-field text-sm font-semibold">
+                            <select id="withdraw-method" class="w-full p-3 rounded-xl input-field text-sm">
                                 <option value="">Select Method</option>
-                                <option value="Nagad">Nagad</option>
-                                <option value="bKash">bKash</option>
-                                <option value="Rocket">Rocket</option>
+                                <option value="Nagad">নগদ</option>
+                                <option value="bKash">বিকাশ</option>
+                                <option value="Rocket">রকেট</option>
                                 <option value="Binance">Binance</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-gray-500 mb-1 ml-1">ACCOUNT NUMBER</label>
+                            <label class="block text-xs font-bold text-gray-500 mb-1 ml-1">YOUR NUMBER</label>
                             <input id="withdraw-number" type="text" placeholder="017xxxxxxxx" class="w-full p-3 rounded-xl input-field text-sm">
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-gray-500 mb-1 ml-1">AMOUNT</label>
                             <input id="withdraw-amount" type="number" placeholder="Min 50" class="w-full p-3 rounded-xl input-field text-sm">
+                            <p class="text-[10px] text-gray-400 mt-1 text-right">Total deduction: <span id="withdraw-deduction" class="font-bold">0</span>৳</p>
                         </div>
-                        <button id="withdraw-btn" onclick="handleWithdrawRequest()" class="w-full p-3 rounded-xl btn-gradient text-sm uppercase font-bold tracking-wide">Withdraw Now</button>
+                        <button id="withdraw-btn" class="w-full p-3 rounded-xl btn-gradient text-sm uppercase tracking-wide">Withdraw Now</button>
                     </div>
                 </div>
-                <div class="mt-6">
-                    <h3 class="text-lg font-bold mb-3 px-1">Withdraw History</h3>
-                    <div id="withdraw-history-list" class="space-y-3"></div>
-                </div>
+                <div class="mt-6"><h3 class="text-lg font-bold mb-3 px-1">Withdraw History</h3><div id="withdraw-history-list" class="space-y-3"></div></div>
             </div>
 
-            <!-- =========== MAIL PAGE (SHOP) =========== -->
+            <!-- =========== MAIL PAGE (SHOP - ORIGINAL) =========== -->
             <div id="mail-page" class="sub-page">
                  <div class="space-y-6">
                     <div class="mail-view-switcher">
@@ -771,7 +769,10 @@
                             <span class="font-semibold text-xs text-gray-600">Tutorials</span>
                         </button>
                     </div>
-
+                     <button onclick="navigateTo('withdraw-page')" class="w-full card-bg p-4 flex justify-between items-center text-left font-bold text-gray-700">
+                        <span class="flex items-center gap-3"><i data-lucide="arrow-up-circle" class="w-5 h-5 text-indigo-500"></i> Withdraw Funds</span>
+                        <i data-lucide="chevron-right" class="w-5 h-5 text-gray-400"></i>
+                    </button>
                     <button id="more-features-btn" class="w-full card-bg p-4 flex justify-between items-center text-left font-bold text-gray-700">
                         <span class="flex items-center gap-3"><i data-lucide="zap" class="w-5 h-5 text-yellow-500"></i> More Features</span>
                         <i data-lucide="chevron-right" class="w-5 h-5 text-gray-400"></i>
@@ -1005,17 +1006,18 @@
         let appConfig = {};
         let insufficientBalanceInterval = null;
 
-        // Configuration for Coin and Account Sells
-        // NOTE: These are static defaults. Admin can change logic to fetch from Firebase config/main
+        // Coin Configuration
         const sellConfig = {
-            // Coins
-            'NAVA': { rate: 10, min: 500, type: 'coin' },
-            'APP': { rate: 15, min: 500, type: 'coin' },
-            'NS': { rate: 8, min: 500, type: 'coin' },
-            // Accounts
-            'FACEBOOK': { rate: 15, type: 'account' },
-            'GMAIL': { rate: 10, type: 'account' },
-            'INSTAGRAM': { rate: 12, type: 'account' }
+            'NAVA': { rate: 10, min: 500 },
+            'APP': { rate: 15, min: 500 },
+            'NS': { rate: 8, min: 500 }
+        };
+
+        // Account Sell Config (Default rates, can be updated via Admin/Firebase)
+        const accountConfig = {
+            'FACEBOOK': { rate: 15, logo: 'facebook' },
+            'GMAIL': { rate: 12, logo: 'mail' },
+            'INSTAGRAM': { rate: 20, logo: 'instagram' }
         };
 
         const loader = document.getElementById('loader');
@@ -1245,7 +1247,6 @@
             const pageLoadFunctions = {
                 'home-page': () => {},
                 'pay-page': loadPaymentHistory,
-                'withdraw-page': loadWithdrawHistory,
                 'mail-page': loadMailStore,
                 'updates-page': () => { loadUpdates(); loadReviews(); },
                 'admin-page': () => { populateAdminMailTypes(); loadReplaceRequests(); loadAdminSellRequests(); },
@@ -1254,6 +1255,7 @@
                 'tutorial-page': loadTutorials,
                 'offer-page': () => { loadSellHistory(); loadTasks(); updateCoinDetails(); updateAccountDetails(); },
                 'send-page': () => { setupDynamicAmountHandlers('send'); },
+                'withdraw-page': () => { setupDynamicAmountHandlers('withdraw'); loadWithdrawHistory(); },
                 'notification-page': showNotifications,
                 'report-history-page': loadReportHistory
             };
@@ -1283,6 +1285,7 @@
             document.getElementById('notification-btn').addEventListener('click', () => navigateTo('notification-page'));
             document.getElementById('deposit-btn').addEventListener('click', handleDepositRequest);
             document.getElementById('home-deposit-btn').addEventListener('click', () => navigateTo('pay-page'));
+            document.getElementById('withdraw-btn').addEventListener('click', handleWithdrawRequest);
             document.getElementById('add-mails-btn').addEventListener('click', handleAddMails);
             document.getElementById('download-history-btn').addEventListener('click', handleDownloadHistory);
             document.getElementById('copy-history-btn').addEventListener('click', handleCopyHistory);
@@ -1342,7 +1345,6 @@
             document.getElementById('sell-category-list').classList.remove('hidden');
         }
 
-        // Coin Logic
         window.updateCoinDetails = () => {
             const coin = document.getElementById('coin-type-select').value;
             const config = sellConfig[coin];
@@ -1351,13 +1353,12 @@
                 document.getElementById('admin-coin-id').textContent = DEFAULT_ADMIN_COIN_ID;
             }
         }
-        
-        // Account Logic
+
         window.updateAccountDetails = () => {
-            const type = document.getElementById('acc-type-select').value;
-            const config = sellConfig[type];
+            const accType = document.getElementById('acc-type-select').value;
+            const config = accountConfig[accType];
             if(config) {
-                 document.getElementById('acc-rate-display').textContent = `1 ID = ${config.rate}৳`;
+                document.getElementById('acc-rate-display').textContent = `1 ACC = ${config.rate}৳`;
             }
         }
 
@@ -1385,18 +1386,18 @@
 
         window.submitAccountSell = async () => {
             const type = document.getElementById('acc-type-select').value;
-            const email = document.getElementById('acc-email').value;
-            const pass = document.getElementById('acc-pass').value;
-            const recovery = document.getElementById('acc-recovery').value;
+            const detailsText = document.getElementById('acc-details').value;
             
-            const config = sellConfig[type];
-            const price = config.rate;
-
-            if(!email || !pass) return showAlert("Fill required fields.");
-
-            const details = `E: ${email}\nP: ${pass}\nR/2FA: ${recovery}`;
+            if(!detailsText) return showAlert("Fill account details.");
             
-            await submitSellRequestGeneral(`${type} Account`, details, price, 'account');
+            // Calculate approximate count based on newlines, though manual verification is needed
+            const count = detailsText.split('\n').filter(line => line.trim().length > 0).length;
+            if(count === 0) return showAlert("Invalid input.");
+
+            const config = accountConfig[type];
+            const expectedPrice = count * config.rate;
+
+            await submitSellRequestGeneral(`Account: ${type} (${count})`, detailsText, expectedPrice, 'account');
         }
 
         async function submitSellRequestGeneral(product, details, price, category) {
@@ -1417,7 +1418,7 @@
                 loadSellHistory();
                 
                 // Clear inputs
-                document.querySelectorAll('input').forEach(i => i.value = '');
+                document.querySelectorAll('input, textarea').forEach(i => i.value = '');
              } catch (e) { showAlert("Error submitting."); console.error(e); }
              finally { loader.style.display = 'none'; }
         }
@@ -1425,7 +1426,6 @@
         async function loadSellHistory() {
             const list = document.getElementById('sell-history-list');
             list.innerHTML = getLoadingHTML();
-            // Querying both Coin and Account sells (ordered by date)
             const q = query(collection(db, "sell_requests"), where("userId", "==", userData.tgChatId), orderBy("createdAt", "desc"));
             const snap = await getDocs(q);
             
@@ -1437,16 +1437,12 @@
             list.innerHTML = snap.docs.map(doc => {
                 const data = doc.data();
                 const color = data.status === 'approved' ? 'text-green-600' : (data.status === 'rejected' ? 'text-red-600' : 'text-yellow-600');
-                const categoryIcon = data.category === 'coin' ? 'coins' : 'user-check';
+                const date = data.createdAt ? data.createdAt.toDate().toLocaleDateString() : 'N/A';
                 return `<div class="card-bg p-3 flex justify-between items-center">
-                    <div class="flex items-center gap-3">
-                         <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><i data-lucide="${categoryIcon}" class="w-4 h-4 text-gray-500"></i></div>
-                         <div><p class="font-bold text-sm text-gray-800">${data.product}</p><p class="text-[10px] text-gray-500">${data.createdAt?.toDate().toLocaleDateString()}</p></div>
-                    </div>
+                    <div><p class="font-bold text-sm text-gray-800">${data.product}</p><p class="text-[10px] text-gray-500">${date}</p></div>
                     <div class="text-right"><p class="font-bold text-sm">৳${parseFloat(data.price).toFixed(2)}</p><p class="text-[10px] font-bold uppercase ${color}">${data.status}</p></div>
                 </div>`;
             }).join('');
-            lucide.createIcons();
         }
 
         // --- WITHDRAW LOGIC ---
@@ -1455,35 +1451,30 @@
             const number = document.getElementById('withdraw-number').value.trim();
             const amount = parseFloat(document.getElementById('withdraw-amount').value);
             
-            const minWithdraw = 50;
-            const fee = 10;
+            if (!method || !number || !amount) return showAlert("Please fill all fields.");
+            if (amount < 50) return showAlert("Minimum withdraw amount is 50 BDT.");
             
-            if(!method || !number || !amount) return showAlert("Please fill all fields.");
-            if(amount < minWithdraw) return showAlert(`Minimum withdraw is ${minWithdraw}৳`);
-            
-            const totalDeduction = amount + fee;
-            if(userData.balance < totalDeduction) return showAlert("Insufficient Balance (Including 10৳ fee).");
-            
-            if(!confirm(`Withdraw ${amount}৳ to ${method}? Fee: ${fee}৳. Total: ${totalDeduction}৳`)) return;
-            
+            const totalDeduction = amount + 10;
+            if (userData.balance < totalDeduction) return showAlert("Insufficient balance (Amount + 10tk Fee).");
+
+            if(!confirm(`Withdraw ৳${amount} to ${method} ${number}?\nTotal Deduction: ৳${totalDeduction}`)) return;
+
             loader.style.display = 'flex';
             try {
                 await runTransaction(db, async(t) => {
                     const userRef = doc(db, "users", userData.tgChatId);
                     const userSnap = await t.get(userRef);
-                    const currentBal = userSnap.data().balance;
+                    if (userSnap.data().balance < totalDeduction) throw "Insufficient Balance";
                     
-                    if(currentBal < totalDeduction) throw "Low Balance";
-                    
-                    t.update(userRef, { balance: currentBal - totalDeduction });
-                    const wRef = doc(collection(db, "withdrawals"));
-                    t.set(wRef, {
+                    t.update(userRef, { balance: userSnap.data().balance - totalDeduction });
+                    const withdrawRef = doc(collection(db, "withdrawals"));
+                    t.set(withdrawRef, {
                         userId: userData.tgChatId,
                         userName: userData.name,
                         method,
                         number,
                         amount,
-                        fee,
+                        fee: 10,
                         totalDeduction,
                         status: 'pending',
                         requestedAt: serverTimestamp()
@@ -1491,30 +1482,33 @@
                 });
                 userData.balance -= totalDeduction;
                 updateUI();
-                showAlert("Withdraw Request Submitted!");
+                showAlert("Withdraw request submitted!");
+                document.getElementById('withdraw-amount').value = '';
+                document.getElementById('withdraw-number').value = '';
                 loadWithdrawHistory();
-                ['withdraw-method', 'withdraw-number', 'withdraw-amount'].forEach(id => document.getElementById(id).value = '');
-            } catch(e) { showAlert(e === "Low Balance" ? "Insufficient Balance" : "Error submitting request."); }
-            finally { loader.style.display = 'none'; }
+            } catch(e) {
+                showAlert(e === "Insufficient Balance" ? "Insufficient Balance" : "Error processing withdraw.");
+            } finally {
+                loader.style.display = 'none';
+            }
         }
 
         async function loadWithdrawHistory() {
-             const list = document.getElementById('withdraw-history-list');
-             list.innerHTML = getLoadingHTML();
-             const q = query(collection(db, "withdrawals"), where("userId", "==", userData.tgChatId), orderBy("requestedAt", "desc"));
-             const snap = await getDocs(q);
-             
-             if(snap.empty) {
-                 list.innerHTML = '<p class="text-center text-gray-400 text-xs">No history.</p>';
-                 return;
-             }
-             
-             list.innerHTML = snap.docs.map(doc => {
-                 const d = doc.data();
-                 const color = d.status === 'approved' ? 'text-green-600' : (d.status === 'rejected' ? 'text-red-600' : 'text-yellow-600');
-                 const displayStatus = d.status === 'approved' ? 'PAID' : d.status.toUpperCase();
-                 return `<div class="card-bg p-3 flex justify-between items-center"><div><p class="font-bold text-sm text-gray-800">Withdraw - ${d.method}</p><p class="text-[10px] text-gray-500">${d.requestedAt?.toDate().toLocaleDateString()}</p></div><div class="text-right"><p class="font-bold text-sm">৳${d.amount}</p><p class="text-[10px] font-bold ${color}">${displayStatus}</p></div></div>`;
-             }).join('');
+            const list = document.getElementById('withdraw-history-list');
+            list.innerHTML = getLoadingHTML();
+            const q = query(collection(db, "withdrawals"), where("userId", "==", userData.tgChatId), orderBy("requestedAt", "desc"));
+            const snap = await getDocs(q);
+            
+            if (snap.empty) return list.innerHTML = '<p class="text-center text-gray-400 text-xs">No withdrawals yet.</p>';
+            
+            list.innerHTML = snap.docs.map(doc => {
+                const w = doc.data();
+                const color = w.status === 'approved' ? 'text-green-600' : (w.status === 'rejected' ? 'text-red-600' : 'text-yellow-600');
+                return `<div class="card-bg p-3 flex justify-between items-center">
+                    <div><p class="font-bold text-sm text-gray-800">Withdraw - ${w.method}</p><p class="text-[10px] text-gray-500">${w.requestedAt?.toDate().toLocaleDateString()}</p></div>
+                    <div class="text-right"><p class="font-bold text-sm text-red-500">-৳${w.amount}</p><p class="text-[10px] font-bold uppercase ${color}">${w.status}</p></div>
+                </div>`;
+            }).join('');
         }
 
         // --- ADMIN SELL REQUESTS ---
@@ -1553,7 +1547,7 @@
                 await runTransaction(db, async(t) => {
                     const rRef = doc(db, "sell_requests", rid);
                     const uRef = doc(db, "users", uid);
-                    t.update(rRef, { status: approve ? 'approved' : 'rejected', price: finalPrice }); // Update price in case admin changed it
+                    t.update(rRef, { status: approve ? 'approved' : 'rejected', price: finalPrice }); 
                     if(approve) t.update(uRef, { balance: increment(finalPrice) });
                 });
                 showAlert("Success!");
@@ -2149,11 +2143,18 @@
 
         function setupDynamicAmountHandlers(type) {
              const inp = document.getElementById(`${type}-amount`);
-             const dis = document.getElementById(`${type}-fee-display`);
-             inp.addEventListener('input', () => {
-                 const val = parseFloat(inp.value) || 0;
-                 dis.textContent = val > 0 ? `Fee (5%): ৳${(val*0.05).toFixed(2)}` : '';
-             });
+             const dis = document.getElementById(`${type}-deduction`) || document.getElementById(`${type}-fee-display`); // Handle both logic
+             
+             if(inp && dis) {
+                 inp.addEventListener('input', () => {
+                     const val = parseFloat(inp.value) || 0;
+                     if(type === 'withdraw') {
+                        dis.textContent = val > 0 ? (val + 10) : 0;
+                     } else {
+                        dis.textContent = val > 0 ? `Fee (5%): ৳${(val*0.05).toFixed(2)}` : '';
+                     }
+                 });
+             }
         }
         
         async function handleSendRequest() {
