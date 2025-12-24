@@ -226,18 +226,18 @@
         /* Mail Switcher */
         .mail-view-switcher { 
             display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 12px; 
+            grid-template-columns: 1fr 1fr 1fr 1fr; 
+            gap: 6px; 
             background-color: #ffffff; 
             padding: 5px; 
             border-radius: 16px; 
             border: 1px solid #f0f0f0;
         }
         .mail-view-switcher button { 
-            padding: 12px; 
+            padding: 8px; 
             border-radius: 12px; 
             font-weight: 700; 
-            font-size: 0.8rem; 
+            font-size: 0.7rem; 
             color: #6b7280; 
             background-color: transparent;
             border: none;
@@ -257,11 +257,6 @@
         }
         .support-item:hover { transform: translateX(-5px); border-color: #d97706; }
         .support-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-right: 12px; }
-        
-        .offer-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-        .offer-item { position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.08); transition: transform 0.2s; aspect-ratio: 9/16; background: #e5e7eb; }
-        .offer-item:active { transform: scale(0.98); }
-        .offer-item img { width: 100%; height: 100%; object-fit: cover; }
         
         /* BEAUTIFIED TASK ITEM */
         .task-item-premium { 
@@ -291,6 +286,23 @@
         .offer-tabs { display: flex; gap: 10px; margin-bottom: 15px; }
         .offer-tab { flex: 1; padding: 12px; text-align: center; background: #ffffff; border-radius: 12px; font-size: 14px; font-weight: 600; color: #6b7280; border: 1px solid #f0f0f0; cursor: pointer; }
         .offer-tab.active { background: #111827; color: #FFD700; border-color: #111827; }
+
+        /* SELL CARD STYLES */
+        .sell-card {
+            background: white; border-radius: 16px; padding: 16px; margin-bottom: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #f0f0f0;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .sell-icon-box {
+            width: 50px; height: 50px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem;
+        }
+        .sell-btn-action {
+            background: #111827; color: #FFD700; border-radius: 8px;
+            padding: 8px 16px; font-size: 12px; font-weight: 700;
+            text-transform: uppercase;
+        }
 
     </style>
 </head>
@@ -426,27 +438,99 @@
                     <button id="tab-tasks" class="offer-tab" onclick="switchOfferTab('tasks')">TASKS</button>
                 </div>
 
-                <!-- SELL SECTION -->
+                <!-- NEW SELL SECTION -->
                 <div id="offer-content-sell" class="offer-content-section">
-                    <div class="card-bg p-5 space-y-4 mb-4">
-                        <div class="text-center">
-                            <h3 class="font-bold text-gray-800">Sell Your Assets</h3>
-                            <p class="text-[10px] text-gray-500">Admin will verify and add balance.</p>
+                    <!-- Category List -->
+                    <div id="sell-category-list">
+                        <!-- Coin Sell Card -->
+                        <div class="sell-card" onclick="openSellForm('coin')">
+                            <div class="flex items-center gap-4">
+                                <div class="sell-icon-box bg-yellow-50 text-yellow-600">
+                                    <i data-lucide="coins" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-sm text-gray-800">COIN SELL</h4>
+                                    <p class="text-[10px] text-gray-500">Sell Nava, App, NS Coins</p>
+                                </div>
+                            </div>
+                            <button class="sell-btn-action">SELL</button>
                         </div>
-                        <div class="space-y-3">
-                            <input id="sell-product-name" type="text" placeholder="Product Name (e.g. Gmail, FB)" class="w-full p-3 rounded-xl input-field text-sm">
-                            <textarea id="sell-details" rows="3" placeholder="Details (Email:Pass:Recovery)" class="w-full p-3 rounded-xl input-field text-sm font-mono"></textarea>
-                            <input id="sell-price" type="number" placeholder="Asking Price (৳)" class="w-full p-3 rounded-xl input-field text-sm">
-                            <button onclick="handleSellRequest()" class="w-full p-3 rounded-xl btn-gradient text-sm uppercase">Submit Request</button>
+                        <!-- Account Sell Card -->
+                        <div class="sell-card" onclick="openSellForm('account')">
+                            <div class="flex items-center gap-4">
+                                <div class="sell-icon-box bg-blue-50 text-blue-600">
+                                    <i data-lucide="user-cog" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-sm text-gray-800">ACCOUNT SELL</h4>
+                                    <p class="text-[10px] text-gray-500">Gmail, FB, 2FA Accounts</p>
+                                </div>
+                            </div>
+                            <button class="sell-btn-action">SELL</button>
+                        </div>
+                         
+                        <div class="mt-6">
+                            <h4 class="font-bold text-sm text-gray-700 mb-2 px-1">Your Sell History</h4>
+                            <div id="sell-history-list" class="space-y-2"></div>
                         </div>
                     </div>
-                    <div>
-                        <h4 class="font-bold text-sm text-gray-700 mb-2 px-1">Your Sell History</h4>
-                        <div id="sell-history-list" class="space-y-2"></div>
+
+                    <!-- Sell Forms Container -->
+                    <div id="sell-forms-container" class="hidden">
+                        <button onclick="closeSellForm()" class="mb-3 flex items-center text-xs text-gray-500 hover:text-gray-800">
+                            <i data-lucide="arrow-left" class="w-4 h-4 mr-1"></i> Back to Categories
+                        </button>
+
+                        <!-- COIN SELL FORM -->
+                        <div id="form-coin-sell" class="hidden space-y-4 card-bg p-5">
+                            <div class="text-center mb-2">
+                                <div id="coin-logo-display" class="w-16 h-16 rounded-full mx-auto mb-2 flex items-center justify-center bg-gray-100 text-gray-400 font-bold text-xs border border-gray-200">LOGO</div>
+                                <h3 id="coin-form-title" class="font-bold text-lg text-gray-800">COIN SELL</h3>
+                                <p id="coin-rate-display" class="text-xs font-mono text-green-600 font-bold bg-green-50 inline-block px-2 py-1 rounded">1K COIN = 10৳</p>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-gray-500 mb-1 ml-1">SELECT COIN</label>
+                                <select id="coin-type-select" onchange="updateCoinDetails()" class="w-full p-3 rounded-xl input-field text-sm font-bold">
+                                    <option value="NAVA">NAVA COIN</option>
+                                    <option value="APP">APP COIN</option>
+                                    <option value="NS">NS COIN</option>
+                                </select>
+                            </div>
+
+                            <div class="bg-gray-50 p-3 rounded-xl border border-gray-200 text-center space-y-2">
+                                <p class="text-[10px] text-gray-500 uppercase font-bold">Send Coins Here (Admin ID)</p>
+                                <p id="admin-coin-id" class="text-sm font-mono font-bold text-gray-800 select-all">@Earn_Fire_Admin</p>
+                                <button onclick="copyCoinAdminId()" class="w-full py-1.5 bg-gray-200 hover:bg-gray-300 rounded text-[10px] font-bold uppercase transition-colors">Copy Admin ID</button>
+                            </div>
+
+                            <div class="space-y-3">
+                                <input id="coin-amount" type="number" placeholder="Sent Amount (Min 500)" class="w-full p-3 rounded-xl input-field text-sm">
+                                <input id="coin-username" type="text" placeholder="Your Username (from where sent)" class="w-full p-3 rounded-xl input-field text-sm">
+                                <input id="coin-time" type="text" readonly class="w-full p-3 rounded-xl input-field text-sm bg-gray-100 text-gray-500">
+                                <button onclick="submitCoinSell()" class="w-full p-3 rounded-xl btn-gradient text-sm uppercase">Submit Coin Sell</button>
+                            </div>
+                        </div>
+
+                        <!-- ACCOUNT SELL FORM -->
+                        <div id="form-account-sell" class="hidden space-y-4 card-bg p-5">
+                            <div class="text-center mb-4">
+                                <div class="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-2 text-blue-600"><i data-lucide="user-check" class="w-6 h-6"></i></div>
+                                <h3 class="font-bold text-lg text-gray-800">Account Sell</h3>
+                                <p class="text-[10px] text-gray-500">Admin will verify and add balance.</p>
+                            </div>
+                            <div class="space-y-3">
+                                <input id="acc-email" type="text" placeholder="Email ID or Username" class="w-full p-3 rounded-xl input-field text-sm">
+                                <input id="acc-pass" type="text" placeholder="Password" class="w-full p-3 rounded-xl input-field text-sm font-mono">
+                                <input id="acc-recovery" type="text" placeholder="Recovery Email or 2FA Key" class="w-full p-3 rounded-xl input-field text-sm font-mono">
+                                <input id="acc-price" type="number" placeholder="Asking Price (৳)" class="w-full p-3 rounded-xl input-field text-sm">
+                                <button onclick="submitAccountSell()" class="w-full p-3 rounded-xl btn-gradient text-sm uppercase">Submit Account</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- TASK SECTION (BEAUTIFIED) -->
+                <!-- TASK SECTION -->
                 <div id="offer-content-tasks" class="offer-content-section" style="display:none;">
                      <div class="bg-blue-50 border border-blue-100 rounded-lg p-3 mb-3 text-center">
                          <p class="text-xs text-blue-700 font-semibold">Complete tasks to earn instant balance.</p>
@@ -630,11 +714,6 @@
                     <h3 class="text-lg font-bold mb-3">Balance Transfer History</h3>
                     <div id="transfer-history-list" class="space-y-3"></div>
                 </div>
-                
-                 <button class="w-full card-bg p-4 flex justify-between items-center text-left font-bold text-gray-700 mt-4" onclick="navigateTo('link-team-page')">
-                    <span class="flex items-center gap-3"><i data-lucide="users" class="w-5 h-5 text-indigo-500"></i> My Team</span>
-                    <i data-lucide="chevron-right" class="w-5 h-5 text-gray-400"></i>
-                </button>
             </div>
 
             <div id="admin-page" class="space-y-6 sub-page">
@@ -673,28 +752,6 @@
                     <div id="replace-requests-list" class="space-y-3"></div>
                 </div>
             </div>
-
-            <div id="link-team-page" class="space-y-6 sub-page">
-                <div class="relative flex items-center justify-center mb-4 pt-2">
-                    <button onclick="navigateTo('features-page')" class="absolute left-0 p-2 rounded-full hover:bg-gray-100 transition-colors">
-                        <i data-lucide="arrow-left" class="w-6 h-6 text-gray-700"></i>
-                    </button>
-                    <h2 class="text-xl font-bold text-center text-gray-800">Team Management</h2>
-                </div>
-                <div class="card-bg p-5 space-y-5">
-                     <p class="text-sm text-center text-gray-600 bg-blue-50 p-3 rounded-xl">Add friends to your team. They can use your balance to purchase items.</p>
-                     <div class="flex gap-2">
-                         <input id="link-friend-id" type="text" placeholder="Friend's Chat ID" class="flex-1 p-3 rounded-xl input-field text-sm">
-                         <button id="search-friend-btn" class="btn-gradient px-4 rounded-xl"><i data-lucide="search" class="w-5 h-5"></i></button>
-                     </div>
-                     <div id="friend-search-result" class="mt-2"></div>
-                </div>
-                <div class="mt-6">
-                    <h3 class="text-lg font-bold mb-3">Team Members</h3>
-                    <div id="linked-friends-list" class="space-y-3"></div>
-                </div>
-            </div>
-
 
             <div id="send-page" class="space-y-6 sub-page">
                 <div class="relative flex items-center justify-center mb-4 pt-2">
@@ -825,6 +882,7 @@
         // ========== CONFIGURATION (SETUP HERE) ==========
         const BOT_TOKEN = "8592535698:AAE2YXelHfTWHKcisFZjoB6K1l1OnuSq5Bg"; // FILL THIS (e.g., 123456:ABC-DEF...)
         const CHANNEL_ID = "@Earn_Fire"; // FILL THIS (e.g., @YourChannel)
+        const DEFAULT_ADMIN_COIN_ID = "6954647230"; // Coin Send Admin ID from config
 
         const firebaseConfig = {
             apiKey: "AIzaSyCoCy08FL_sHHdA0f2cJg0BaF-iYAhFuk0",
@@ -846,6 +904,13 @@
         let userData = null;
         let appConfig = {};
         let insufficientBalanceInterval = null;
+
+        // Coin Configuration
+        const sellConfig = {
+            'NAVA': { rate: 10, min: 500, logo: 'https://placehold.co/100x100?text=NAVA' },
+            'APP': { rate: 15, min: 500, logo: 'https://placehold.co/100x100?text=APP' },
+            'NS': { rate: 8, min: 500, logo: 'https://placehold.co/100x100?text=NS' }
+        };
 
         const loader = document.getElementById('loader');
 
@@ -940,9 +1005,6 @@
                     blockedUntil: null, 
                     dailyRejections: { date: new Date().toISOString().slice(0, 10), count: 0 }, 
                     lastSeenNotification: null,
-                    linkedUsers: [], 
-                    linkedBy: null, 
-                    teamSpending: {},
                     lastSeen: serverTimestamp(),
                     lastAutoMessage: null 
                 };
@@ -1083,8 +1145,7 @@
                 'profile-page': loadProfilePage,
                 'features-page': loadFeaturesPage,
                 'tutorial-page': loadTutorials,
-                'offer-page': () => { loadSellHistory(); loadTasks(); },
-                'link-team-page': loadLinkedFriends,
+                'offer-page': () => { loadSellHistory(); loadTasks(); updateCoinDetails(); },
                 'send-page': () => { setupDynamicAmountHandlers('send'); },
                 'notification-page': showNotifications,
                 'report-history-page': loadReportHistory
@@ -1126,7 +1187,6 @@
             document.getElementById('features-receive-btn').addEventListener('click', handleReceive);
             document.getElementById('features-send-btn').addEventListener('click', () => navigateTo('send-page'));
             document.getElementById('submit-send-btn').addEventListener('click', handleSendRequest);
-            document.getElementById('search-friend-btn').addEventListener('click', handleSearchFriend);
             document.getElementById('add-task-btn').addEventListener('click', handleAddTask);
             document.getElementById('profile-tutorial-btn').addEventListener('click', () => navigateTo('tutorial-page'));
             document.getElementById('profile-report-history-btn').addEventListener('click', () => navigateTo('report-history-page'));
@@ -1148,35 +1208,112 @@
             document.getElementById('tab-' + tab).classList.add('active');
             document.querySelectorAll('.offer-content-section').forEach(s => s.style.display = 'none');
             document.getElementById('offer-content-' + tab).style.display = 'block';
+            if(tab === 'sell') {
+                closeSellForm(); // Reset to list view
+            }
         }
 
-        // --- SELL LOGIC ---
-        window.handleSellRequest = async () => {
-            const product = document.getElementById('sell-product-name').value;
-            const details = document.getElementById('sell-details').value;
-            const price = parseFloat(document.getElementById('sell-price').value);
+        // --- NEW SELL LOGIC ---
+        window.openSellForm = (type) => {
+            document.getElementById('sell-category-list').classList.add('hidden');
+            document.getElementById('sell-forms-container').classList.remove('hidden');
+            
+            document.getElementById('form-coin-sell').classList.add('hidden');
+            document.getElementById('form-account-sell').classList.add('hidden');
+            
+            if(type === 'coin') {
+                document.getElementById('form-coin-sell').classList.remove('hidden');
+                updateCoinDetails();
+            } else {
+                document.getElementById('form-account-sell').classList.remove('hidden');
+            }
+        }
 
-            if (!product || !details || isNaN(price)) return showAlert("Please fill all fields correctly.");
+        window.closeSellForm = () => {
+            document.getElementById('sell-forms-container').classList.add('hidden');
+            document.getElementById('sell-category-list').classList.remove('hidden');
+        }
 
-            loader.style.display = 'flex';
-            try {
+        window.updateCoinDetails = () => {
+            const coin = document.getElementById('coin-type-select').value;
+            const config = sellConfig[coin];
+            if(config) {
+                document.getElementById('coin-rate-display').textContent = `1K COIN = ${config.rate}৳`;
+                document.getElementById('coin-logo-display').innerHTML = `<i data-lucide="coins" class="w-8 h-8 text-yellow-500"></i>`; // Using Icon instead of generic logo
+                lucide.createIcons();
+                
+                // Auto fill time
+                const now = new Date();
+                const formattedTime = now.getFullYear() + "-" + 
+                    String(now.getMonth() + 1).padStart(2, '0') + "-" + 
+                    String(now.getDate()).padStart(2, '0') + " " + 
+                    String(now.getHours()).padStart(2, '0') + ":" + 
+                    String(now.getMinutes()).padStart(2, '0') + ":" + 
+                    String(now.getSeconds()).padStart(2, '0');
+                document.getElementById('coin-time').value = formattedTime;
+                
+                // Set Admin ID (Assuming static from config for now or fetch from DB)
+                document.getElementById('admin-coin-id').textContent = DEFAULT_ADMIN_COIN_ID;
+            }
+        }
+
+        window.copyCoinAdminId = () => {
+            const id = document.getElementById('admin-coin-id').textContent;
+            copyToClipboard(id, null, "এডমিন আইডি সফল ভাবে কপি করা হয়েছে। এখন এই ইউজার নেম এ কয়েন পাঠিয়ে নিচের ফর্ম পূরণ করুন।");
+        }
+
+        window.submitCoinSell = async () => {
+            const type = document.getElementById('coin-type-select').value;
+            const amount = parseInt(document.getElementById('coin-amount').value);
+            const username = document.getElementById('coin-username').value;
+            const time = document.getElementById('coin-time').value;
+
+            if(!amount || amount < 500) return showAlert("Minimum 500 coins required.");
+            if(!username) return showAlert("Please enter your username.");
+
+            const config = sellConfig[type];
+            const expectedPrice = (amount / 1000) * config.rate;
+
+            const details = `Sent: ${amount} | User: ${username} | Time: ${time}`;
+
+            await submitSellRequestGeneral(`Coin: ${type}`, details, expectedPrice, 'coin');
+        }
+
+        window.submitAccountSell = async () => {
+            const email = document.getElementById('acc-email').value;
+            const pass = document.getElementById('acc-pass').value;
+            const recovery = document.getElementById('acc-recovery').value;
+            const price = parseFloat(document.getElementById('acc-price').value);
+
+            if(!email || !pass || !price) return showAlert("Fill all fields.");
+
+            const details = `E: ${email}\nP: ${pass}\nR/2FA: ${recovery}`;
+            
+            await submitSellRequestGeneral("Account Sell", details, price, 'account');
+        }
+
+        async function submitSellRequestGeneral(product, details, price, category) {
+             loader.style.display = 'flex';
+             try {
                 await addDoc(collection(db, "sell_requests"), {
                     userId: userData.tgChatId,
                     userName: userData.name,
                     product,
                     details,
                     price,
+                    category,
                     status: 'pending',
                     createdAt: serverTimestamp()
                 });
-                showAlert("Sell Request Submitted!");
-                document.getElementById('sell-product-name').value = '';
-                document.getElementById('sell-details').value = '';
-                document.getElementById('sell-price').value = '';
+                showAlert("Request Submitted! Wait for Admin approval.");
+                closeSellForm();
                 loadSellHistory();
-            } catch (e) { showAlert("Error submitting request."); }
-            finally { loader.style.display = 'none'; }
-        };
+                
+                // Clear inputs
+                document.querySelectorAll('input').forEach(i => i.value = '');
+             } catch (e) { showAlert("Error submitting."); console.error(e); }
+             finally { loader.style.display = 'none'; }
+        }
 
         async function loadSellHistory() {
             const list = document.getElementById('sell-history-list');
@@ -1194,7 +1331,7 @@
                 const color = data.status === 'approved' ? 'text-green-600' : (data.status === 'rejected' ? 'text-red-600' : 'text-yellow-600');
                 return `<div class="card-bg p-3 flex justify-between items-center">
                     <div><p class="font-bold text-sm text-gray-800">${data.product}</p><p class="text-[10px] text-gray-500">${data.createdAt?.toDate().toLocaleDateString()}</p></div>
-                    <div class="text-right"><p class="font-bold text-sm">৳${data.price}</p><p class="text-[10px] font-bold uppercase ${color}">${data.status}</p></div>
+                    <div class="text-right"><p class="font-bold text-sm">৳${parseFloat(data.price).toFixed(2)}</p><p class="text-[10px] font-bold uppercase ${color}">${data.status}</p></div>
                 </div>`;
             }).join('');
         }
@@ -1214,26 +1351,29 @@
             list.innerHTML = snap.docs.map(d => {
                 const r = d.data();
                 return `<div class="bg-gray-50 p-3 rounded-xl border border-gray-200">
-                    <p class="text-xs font-bold text-gray-800">${r.userName} wants to sell ${r.product}</p>
-                    <p class="text-[10px] text-gray-600 mt-1 font-mono bg-white p-1 rounded border">${r.details}</p>
-                    <p class="text-xs font-bold mt-2">Price: ৳${r.price}</p>
+                    <p class="text-xs font-bold text-gray-800">${r.userName} - ${r.product}</p>
+                    <p class="text-[10px] text-gray-600 mt-1 font-mono bg-white p-1 rounded border whitespace-pre-wrap">${r.details}</p>
+                    <div class="flex items-center gap-2 mt-2"><span class="text-xs font-bold">Price:</span> <input type="number" value="${r.price}" id="price-${d.id}" class="w-20 p-1 text-xs border rounded"></div>
                     <div class="flex gap-2 mt-3">
-                        <button onclick="resolveSell('${d.id}', '${r.userId}', ${r.price}, true)" class="flex-1 py-2 bg-green-500 text-white text-[10px] font-bold rounded-lg uppercase">Approve</button>
-                        <button onclick="resolveSell('${d.id}', '${r.userId}', 0, false)" class="flex-1 py-2 bg-red-500 text-white text-[10px] font-bold rounded-lg uppercase">Reject</button>
+                        <button onclick="resolveSell('${d.id}', '${r.userId}', true)" class="flex-1 py-2 bg-green-500 text-white text-[10px] font-bold rounded-lg uppercase">Approve</button>
+                        <button onclick="resolveSell('${d.id}', '${r.userId}', false)" class="flex-1 py-2 bg-red-500 text-white text-[10px] font-bold rounded-lg uppercase">Reject</button>
                     </div>
                 </div>`;
             }).join('');
         }
 
-        window.resolveSell = async (rid, uid, price, approve) => {
-            if(!confirm(approve ? "Approve & Pay?" : "Reject?")) return;
+        window.resolveSell = async (rid, uid, approve) => {
+            const priceInput = document.getElementById(`price-${rid}`);
+            const finalPrice = priceInput ? parseFloat(priceInput.value) : 0;
+            
+            if(!confirm(approve ? `Approve & Pay ৳${finalPrice}?` : "Reject?")) return;
             loader.style.display = 'flex';
             try {
                 await runTransaction(db, async(t) => {
                     const rRef = doc(db, "sell_requests", rid);
                     const uRef = doc(db, "users", uid);
-                    t.update(rRef, { status: approve ? 'approved' : 'rejected' });
-                    if(approve) t.update(uRef, { balance: increment(price) });
+                    t.update(rRef, { status: approve ? 'approved' : 'rejected', price: finalPrice }); // Update price in case admin changed it
+                    if(approve) t.update(uRef, { balance: increment(finalPrice) });
                 });
                 showAlert("Success!");
                 loadAdminSellRequests();
@@ -1515,11 +1655,7 @@
                 const userSnap = await getDoc(doc(db, "users", userData.tgChatId));
                 userData = userSnap.data();
 
-                let effectiveBalance = userData.balance;
-                if (userData.linkedBy) {
-                    const teamLeaderSnap = await getDoc(doc(db, "users", userData.linkedBy));
-                    if (teamLeaderSnap.exists()) effectiveBalance += teamLeaderSnap.data().balance;
-                }
+                const effectiveBalance = userData.balance;
 
                 const allMails = appConfig.mails || [];
                 const loginMails = allMails.filter(m => m.category === 'login' || !m.category);
@@ -1619,7 +1755,7 @@
             loader.style.display = 'flex';
             
             try {
-                // Step 1: Find a candidate mail OUTSIDE transaction (To avoid complex query errors in Tx)
+                // Step 1: Find a candidate mail OUTSIDE transaction
                 const q = query(collection(db, stockKey), where("isSold", "==", false), limit(1));
                 const snapshot = await getDocs(q);
                 
@@ -1629,48 +1765,22 @@
                 await runTransaction(db, async (transaction) => {
                     const buyerRef = doc(db, "users", userData.tgChatId);
                     const counterRef = doc(db, "counters", "mail_purchase");
-                    const mailRef = candidateMailDoc.ref; // Use the specific ref found earlier
+                    const mailRef = candidateMailDoc.ref; 
                     
-                    // ALL READS MUST BE HERE (Top of transaction block)
                     const buyerSnap = await transaction.get(buyerRef);
                     const counterSnap = await transaction.get(counterRef);
-                    const mailSnap = await transaction.get(mailRef); // Check again if it's still unsold
+                    const mailSnap = await transaction.get(mailRef); 
 
                     if (!buyerSnap.exists()) throw "User Error";
-                    if (!mailSnap.exists() || mailSnap.data().isSold) throw "Race Condition"; // Someone else bought it ms ago
+                    if (!mailSnap.exists() || mailSnap.data().isSold) throw "Race Condition"; 
 
                     let currentBuyerData = buyerSnap.data();
-                    let teamLeaderRef = null;
-                    let currentLeaderData = null;
 
-                    // Read Team Leader if needed (Must be done before writes too)
-                    if (currentBuyerData.linkedBy) {
-                        teamLeaderRef = doc(db, "users", currentBuyerData.linkedBy);
-                        const leaderSnap = await transaction.get(teamLeaderRef);
-                        if (leaderSnap.exists()) currentLeaderData = leaderSnap.data();
-                    }
-
-                    // --- LOGIC STARTS HERE ---
-                    const effectiveBalance = currentBuyerData.balance + (currentLeaderData ? currentLeaderData.balance : 0);
-                    if (effectiveBalance < cost) throw "Insufficient Balance";
+                    if (currentBuyerData.balance < cost) throw "Insufficient Balance";
 
                     const mailData = mailSnap.data();
-                    let costRemaining = cost;
-                    let paidBy = 'self';
-                    let buyerDeduction = Math.min(costRemaining, currentBuyerData.balance);
                     
-                    // --- WRITES START HERE ---
-                    if (buyerDeduction > 0) {
-                        transaction.update(buyerRef, { balance: currentBuyerData.balance - buyerDeduction });
-                        costRemaining -= buyerDeduction;
-                    }
-                    if (costRemaining > 0 && teamLeaderRef) {
-                        transaction.update(teamLeaderRef, { balance: currentLeaderData.balance - costRemaining });
-                        const newSpending = (currentLeaderData.teamSpending?.[userData.tgChatId] || 0) + costRemaining;
-                        transaction.update(teamLeaderRef, { [`teamSpending.${userData.tgChatId}`]: newSpending });
-                        paidBy = currentBuyerData.linkedBy;
-                    }
-
+                    transaction.update(buyerRef, { balance: currentBuyerData.balance - cost });
                     transaction.update(mailRef, { isSold: true, soldTo: userData.tgChatId, soldAt: serverTimestamp() });
                     
                     const saleId = counterSnap.exists() ? counterSnap.data().currentId + 1 : 1;
@@ -1680,16 +1790,15 @@
                     const mailConfig = appConfig.mails.find(m => m.stockKey === stockKey);
                     
                     transaction.set(newPurchaseRef, {
-                        saleId: saleId, userId: userData.tgChatId, paidBy: paidBy, mailType: mailType,
+                        saleId: saleId, userId: userData.tgChatId, paidBy: 'self', mailType: mailType,
                         mail: mailData.email, password: mailData.password || null,
                         refreshToken: mailData.refresh_token || null, clientId: mailData.client_id || null,
                         cost: cost, purchasedAt: serverTimestamp(),
                         expirationHours: mailConfig ? mailConfig.expirationHours : null
                     });
                     
-                    userData.balance = currentBuyerData.balance - buyerDeduction;
+                    userData.balance = currentBuyerData.balance - cost;
                     
-                    // Update UI immediately for success modal
                     document.getElementById('purchase-success-email').textContent = mailData.email;
                     document.getElementById('purchase-success-password').textContent = mailData.password || 'N/A';
                 });
@@ -1896,49 +2005,6 @@
                 navigateTo('features-page');
             } catch(e) { showAlert(e); }
             finally { loader.style.display = 'none'; }
-        }
-
-        async function handleSearchFriend() {
-            const fid = document.getElementById('link-friend-id').value.trim();
-            if(!fid) return;
-            const snap = await getDoc(doc(db, "users", fid));
-            if(!snap.exists()) return document.getElementById('friend-search-result').innerHTML = "<p class='text-red-500 text-xs'>User not found.</p>";
-            document.getElementById('friend-search-result').innerHTML = `<div class="bg-gray-100 p-2 rounded flex justify-between items-center mt-2"><span class="text-sm font-bold">${snap.data().name}</span><button onclick="linkFriend('${fid}')" class="text-xs bg-blue-500 text-white px-2 py-1 rounded">Link</button></div>`;
-        }
-        
-        window.linkFriend = async (fid) => {
-            await updateDoc(doc(db, "users", userData.tgChatId), { linkedUsers: arrayUnion(fid) });
-            await updateDoc(doc(db, "users", fid), { linkedBy: userData.tgChatId });
-            showAlert("Linked!");
-            loadLinkedFriends();
-            document.getElementById('friend-search-result').innerHTML = '';
-            document.getElementById('link-friend-id').value = '';
-        }
-
-        async function loadLinkedFriends() {
-             const list = document.getElementById('linked-friends-list');
-             list.innerHTML = getLoadingHTML();
-             const snap = await getDoc(doc(db, "users", userData.tgChatId));
-             const linked = snap.data().linkedUsers || [];
-             if(linked.length === 0) return list.innerHTML = '<p class="text-gray-400 text-xs text-center">No team members.</p>';
-             
-             let html = '';
-             for(const uid of linked) {
-                 const f = await getDoc(doc(db, "users", uid));
-                 if(f.exists()) {
-                     const spent = userData.teamSpending?.[uid] || 0;
-                     html += `<div class="card-bg p-3 flex justify-between items-center"><div><p class="font-bold text-sm text-gray-800">${f.data().name}</p><p class="text-[10px] text-gray-500">Spent: ৳${spent.toFixed(2)}</p></div><button onclick="unlink('${uid}')" class="text-red-500"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div>`;
-                 }
-             }
-             list.innerHTML = html;
-             lucide.createIcons();
-        }
-        
-        window.unlink = async (uid) => {
-             if(!confirm("Remove user?")) return;
-             await updateDoc(doc(db, "users", userData.tgChatId), { linkedUsers: arrayRemove(uid) });
-             await updateDoc(doc(db, "users", uid), { linkedBy: null });
-             loadLinkedFriends();
         }
 
         async function loadTutorials() {
