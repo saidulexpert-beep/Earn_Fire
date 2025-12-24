@@ -303,18 +303,6 @@
             padding: 8px 16px; font-size: 12px; font-weight: 700;
             text-transform: uppercase;
         }
-        .gradient-border-box {
-            position: relative;
-            background: #fff;
-            padding: 2px;
-            border-radius: 16px;
-            background: linear-gradient(135deg, #FFD700, #C06C02);
-        }
-        .gradient-border-inner {
-            background: #fff;
-            border-radius: 14px;
-            padding: 16px;
-        }
 
     </style>
 </head>
@@ -475,7 +463,7 @@
                                 </div>
                                 <div>
                                     <h4 class="font-bold text-sm text-gray-800">ACCOUNT SELL</h4>
-                                    <p class="text-[10px] text-gray-500">Gmail, FB, Insta Accounts</p>
+                                    <p class="text-[10px] text-gray-500">Gmail, FB, 2FA Accounts</p>
                                 </div>
                             </div>
                             <button class="sell-btn-action">SELL</button>
@@ -493,59 +481,81 @@
                             <i data-lucide="arrow-left" class="w-4 h-4 mr-1"></i> Back to Categories
                         </button>
 
-                        <!-- DYNAMIC SELL FORM (Used for both Coin & Account) -->
-                        <div id="dynamic-sell-form" class="gradient-border-box">
-                            <div class="gradient-border-inner space-y-4">
-                                <!-- 1. User Profile Area -->
-                                <div class="flex items-center justify-between border-b border-gray-100 pb-3">
-                                    <div class="flex items-center gap-2">
-                                        <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
-                                            <img id="form-user-pic" src="" class="w-full h-full object-cover hidden">
-                                            <i id="form-user-icon" data-lucide="user" class="w-4 h-4 text-gray-500"></i>
-                                        </div>
-                                        <div>
-                                            <p id="form-user-name" class="text-xs font-bold text-gray-800">User</p>
-                                            <p class="text-[8px] text-green-500 font-bold">● ONLINE</p>
-                                        </div>
+                        <!-- COIN SELL FORM (NEW ATTRACTIVE DESIGN) -->
+                        <div id="form-coin-sell" class="hidden card-bg overflow-hidden border-0 shadow-xl">
+                            <!-- 1. Profile/Header Style -->
+                            <div class="bg-gradient-to-br from-gray-900 to-gray-800 p-6 text-center relative">
+                                <div class="w-16 h-16 mx-auto bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border-2 border-yellow-500/50 mb-2 shadow-lg">
+                                    <i data-lucide="coins" class="w-8 h-8 text-yellow-400"></i>
+                                </div>
+                                <h3 class="text-xl font-black text-white tracking-wider font-orbitron">COIN TRADING</h3>
+                                <p class="text-[10px] text-gray-400 font-medium">Secure & Instant Sell</p>
+                            </div>
+
+                            <div class="p-5 space-y-5">
+                                <!-- 2. Admin ID Copy -->
+                                <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-3 flex items-center justify-between shadow-sm">
+                                    <div>
+                                        <p class="text-[10px] text-yellow-700 font-bold uppercase tracking-wider mb-1">Send Coins To</p>
+                                        <p id="admin-coin-id" class="font-mono font-bold text-gray-800 text-sm">@Earn_Fire_Admin</p>
                                     </div>
-                                    <div class="bg-yellow-50 px-2 py-1 rounded text-[10px] font-bold text-yellow-700 uppercase" id="form-type-badge">COIN</div>
+                                    <button onclick="copyCoinAdminId()" class="bg-yellow-500 hover:bg-yellow-600 text-white p-2 rounded-lg shadow-md transition-transform active:scale-95">
+                                        <i data-lucide="copy" class="w-4 h-4"></i>
+                                    </button>
                                 </div>
 
-                                <!-- 2. Admin ID Copy Area -->
-                                <div class="bg-gray-50 p-3 rounded-xl border border-dashed border-gray-300 text-center">
-                                    <p class="text-[10px] text-gray-500 mb-1">Send to this Admin ID:</p>
-                                    <div class="flex items-center justify-between bg-white px-3 py-2 rounded-lg border border-gray-200">
-                                        <span id="admin-sell-id" class="text-xs font-mono font-bold text-gray-800">Loading...</span>
-                                        <button onclick="copySellAdminId()" class="text-blue-600"><i data-lucide="copy" class="w-4 h-4"></i></button>
-                                    </div>
-                                </div>
-
-                                <!-- 3. Select & Rate -->
-                                <div class="flex gap-2">
+                                <!-- 3. Select & Rate Side-by-Side -->
+                                <div class="flex gap-3 items-center">
                                     <div class="flex-1">
-                                        <label class="block text-[10px] font-bold text-gray-400 mb-1">SELECT TYPE</label>
-                                        <select id="sell-type-select" onchange="updateSellDetails()" class="w-full p-2 rounded-lg bg-gray-50 border border-gray-200 text-xs font-bold focus:outline-none"></select>
+                                        <label class="text-[10px] font-bold text-gray-400 uppercase ml-1 mb-1 block">Select Coin</label>
+                                        <div class="relative">
+                                            <select id="coin-type-select" onchange="updateCoinDetails()" class="w-full p-3 pl-3 rounded-xl bg-gray-50 border border-gray-200 text-sm font-bold appearance-none focus:outline-none focus:border-yellow-400 transition-colors cursor-pointer">
+                                                <option value="NAVA">NAVA COIN</option>
+                                                <option value="APP">APP COIN</option>
+                                                <option value="NS">NS COIN</option>
+                                            </select>
+                                            <i data-lucide="chevron-down" class="w-4 h-4 text-gray-400 absolute right-3 top-3.5 pointer-events-none"></i>
+                                        </div>
                                     </div>
-                                    <div class="flex-1">
-                                        <label class="block text-[10px] font-bold text-gray-400 mb-1">RATE</label>
-                                        <div id="sell-rate-display" class="w-full p-2 rounded-lg bg-yellow-50 border border-yellow-200 text-xs font-bold text-yellow-700 flex items-center justify-center h-[34px]">
-                                            Loading...
+                                    <div class="shrink-0 pt-5">
+                                        <div id="coin-rate-display" class="bg-gray-900 text-yellow-400 px-4 py-3 rounded-xl font-mono text-xs font-bold border border-gray-800 shadow-lg min-w-[100px] text-center">
+                                            1K = 10৳
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- 4. The Form -->
-                                <div id="sell-input-area" class="space-y-3 pt-2">
-                                    <!-- Inputs will be injected by JS based on type -->
+                                <!-- 4. Inputs -->
+                                <div class="space-y-3">
+                                    <div>
+                                        <label class="text-[10px] font-bold text-gray-400 uppercase ml-1 mb-1 block">Sent Amount</label>
+                                        <input id="coin-amount" type="number" placeholder="Min 500" class="w-full p-3 rounded-xl input-field text-sm font-mono font-semibold">
+                                    </div>
+                                    <div>
+                                        <label class="text-[10px] font-bold text-gray-400 uppercase ml-1 mb-1 block">Your Username</label>
+                                        <input id="coin-username" type="text" placeholder="@username" class="w-full p-3 rounded-xl input-field text-sm font-semibold">
+                                    </div>
                                 </div>
 
-                                <!-- 5. Time (Auto) -->
-                                <div>
-                                    <label class="block text-[10px] font-bold text-gray-400 mb-1">TIME</label>
-                                    <input id="sell-time-auto" type="text" class="w-full p-2 rounded-lg bg-gray-100 border border-gray-200 text-xs text-gray-500 font-mono" readonly>
-                                </div>
+                                <!-- Submit -->
+                                <button onclick="submitCoinSell()" class="w-full py-3.5 rounded-xl btn-gradient text-sm uppercase font-bold tracking-wide shadow-lg mt-2">
+                                    Submit Request
+                                </button>
+                            </div>
+                        </div>
 
-                                <button onclick="submitSellRequest()" class="w-full p-3 rounded-xl btn-gradient text-sm uppercase shadow-lg mt-2">Submit Request</button>
+                        <!-- ACCOUNT SELL FORM -->
+                        <div id="form-account-sell" class="hidden space-y-4 card-bg p-5">
+                            <div class="text-center mb-4">
+                                <div class="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-2 text-blue-600"><i data-lucide="user-check" class="w-6 h-6"></i></div>
+                                <h3 class="font-bold text-lg text-gray-800">Account Sell</h3>
+                                <p class="text-[10px] text-gray-500">Admin will verify and add balance.</p>
+                            </div>
+                            <div class="space-y-3">
+                                <input id="acc-email" type="text" placeholder="Email ID or Username" class="w-full p-3 rounded-xl input-field text-sm">
+                                <input id="acc-pass" type="text" placeholder="Password" class="w-full p-3 rounded-xl input-field text-sm font-mono">
+                                <input id="acc-recovery" type="text" placeholder="Recovery Email or 2FA Key" class="w-full p-3 rounded-xl input-field text-sm font-mono">
+                                <input id="acc-price" type="number" placeholder="Asking Price (৳)" class="w-full p-3 rounded-xl input-field text-sm">
+                                <button onclick="submitAccountSell()" class="w-full p-3 rounded-xl btn-gradient text-sm uppercase">Submit Account</button>
                             </div>
                         </div>
                     </div>
@@ -906,13 +916,13 @@
         const DEFAULT_ADMIN_COIN_ID = "6954647230"; // Coin Send Admin ID from config
 
         const firebaseConfig = {
-            apiKey: "AIzaSyAWcpuG1If1KwpQ1oZbfQEUUSC2_uQs0zg",
-            authDomain: "earn-fire-88ed3.firebaseapp.com",
-            databaseURL: "https://earn-fire-88ed3-default-rtdb.firebaseio.com",
-            projectId: "earn-fire-88ed3",
-            storageBucket: "earn-fire-88ed3.firebasestorage.app",
-            messagingSenderId: "60636949306",
-            appId: "1:60636949306:web:d1886ced195ca9ab037e03"
+          apiKey: "AIzaSyAWcpuG1If1KwpQ1oZbfQEUUSC2_uQs0zg",
+          authDomain: "earn-fire-88ed3.firebaseapp.com",
+          databaseURL: "https://earn-fire-88ed3-default-rtdb.firebaseio.com",
+          projectId: "earn-fire-88ed3",
+          storageBucket: "earn-fire-88ed3.firebasestorage.app",
+          messagingSenderId: "60636949306",
+          appId: "1:60636949306:web:d1886ced195ca9ab037e03"
         };
 
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
@@ -926,16 +936,11 @@
         let appConfig = {};
         let insufficientBalanceInterval = null;
 
-        // Configuration for Sell (Coin & Account) - RATES can be dynamic here or fetched from DB
+        // Coin Configuration
         const sellConfig = {
-            // Coins
-            'NAVA': { rate: 10, unit: '1K', type: 'coin', logo: 'coins' },
-            'APP': { rate: 15, unit: '1K', type: 'coin', logo: 'coins' },
-            'NS': { rate: 8, unit: '1K', type: 'coin', logo: 'coins' },
-            // Accounts
-            'GMAIL': { rate: 15, unit: '1 Pc', type: 'account', logo: 'mail' },
-            'FACEBOOK': { rate: 10, unit: '1 Pc', type: 'account', logo: 'facebook' },
-            'INSTAGRAM': { rate: 12, unit: '1 Pc', type: 'account', logo: 'instagram' }
+            'NAVA': { rate: 10, min: 500 },
+            'APP': { rate: 15, min: 500 },
+            'NS': { rate: 8, min: 500 }
         };
 
         const loader = document.getElementById('loader');
@@ -952,7 +957,7 @@
                 
                 if (!currentUserTg) {
                    // For testing in browser without Telegram
-                   // currentUserTg = { id: 12345678, first_name: "Test", last_name: "User", username: "tester", photo_url: "https://placehold.co/100" };
+                   // currentUserTg = { id: 12345678, first_name: "Test", last_name: "User", username: "tester" };
                 }
 
                 if (!currentUserTg) {
@@ -1171,7 +1176,7 @@
                 'profile-page': loadProfilePage,
                 'features-page': loadFeaturesPage,
                 'tutorial-page': loadTutorials,
-                'offer-page': () => { loadSellHistory(); loadTasks(); },
+                'offer-page': () => { loadSellHistory(); loadTasks(); updateCoinDetails(); },
                 'send-page': () => { setupDynamicAmountHandlers('send'); },
                 'notification-page': showNotifications,
                 'report-history-page': loadReportHistory
@@ -1240,42 +1245,19 @@
         }
 
         // --- NEW SELL LOGIC ---
-        let currentSellCategory = null;
-
         window.openSellForm = (type) => {
-            currentSellCategory = type;
             document.getElementById('sell-category-list').classList.add('hidden');
             document.getElementById('sell-forms-container').classList.remove('hidden');
             
-            // Populate Select Dropdown
-            const selectEl = document.getElementById('sell-type-select');
-            selectEl.innerHTML = '';
+            document.getElementById('form-coin-sell').classList.add('hidden');
+            document.getElementById('form-account-sell').classList.add('hidden');
             
-            Object.keys(sellConfig).forEach(key => {
-                if(sellConfig[key].type === type) {
-                    selectEl.innerHTML += `<option value="${key}">${key}</option>`;
-                }
-            });
-
-            // Update UI elements based on type
-            document.getElementById('form-type-badge').textContent = type.toUpperCase();
-            
-            // Setup User Info
-            if (currentUserTg) {
-                document.getElementById('form-user-name').textContent = currentUserTg.first_name;
-                if(userData.photo_url) {
-                    document.getElementById('form-user-pic').src = userData.photo_url;
-                    document.getElementById('form-user-pic').classList.remove('hidden');
-                    document.getElementById('form-user-icon').classList.add('hidden');
-                }
+            if(type === 'coin') {
+                document.getElementById('form-coin-sell').classList.remove('hidden');
+                updateCoinDetails();
+            } else {
+                document.getElementById('form-account-sell').classList.remove('hidden');
             }
-
-            // Set Time (Auto)
-            const now = new Date();
-            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-            document.getElementById('sell-time-auto').value = now.toISOString().slice(0, 19).replace('T', ' ');
-
-            updateSellDetails();
         }
 
         window.closeSellForm = () => {
@@ -1283,82 +1265,69 @@
             document.getElementById('sell-category-list').classList.remove('hidden');
         }
 
-        window.updateSellDetails = () => {
-            const type = document.getElementById('sell-type-select').value;
-            const config = sellConfig[type];
+        window.updateCoinDetails = () => {
+            const coin = document.getElementById('coin-type-select').value;
+            const config = sellConfig[coin];
             if(config) {
-                // Rate Display
-                document.getElementById('sell-rate-display').innerHTML = `<span class="text-[10px] text-gray-500 mr-1">${config.unit} =</span> ${config.rate}৳`;
-                
-                // Admin ID (Default for now, can be dynamic)
-                document.getElementById('admin-sell-id').textContent = DEFAULT_ADMIN_COIN_ID;
-
-                // Dynamic Input Fields
-                const area = document.getElementById('sell-input-area');
-                if(currentSellCategory === 'coin') {
-                    area.innerHTML = `
-                        <input id="coin-amount" type="number" placeholder="Sent Amount (Min 500)" class="w-full p-3 rounded-xl input-field text-sm">
-                        <input id="coin-username" type="text" placeholder="Your Username (Sender)" class="w-full p-3 rounded-xl input-field text-sm">
-                    `;
-                } else {
-                    area.innerHTML = `
-                        <input id="acc-email" type="text" placeholder="Email / Username" class="w-full p-3 rounded-xl input-field text-sm">
-                        <input id="acc-pass" type="text" placeholder="Password" class="w-full p-3 rounded-xl input-field text-sm font-mono">
-                        <input id="acc-2fa" type="text" placeholder="2FA / Recovery" class="w-full p-3 rounded-xl input-field text-sm font-mono">
-                    `;
-                }
+                document.getElementById('coin-rate-display').textContent = `1K = ${config.rate}৳`;
+                document.getElementById('admin-coin-id').textContent = DEFAULT_ADMIN_COIN_ID;
             }
         }
 
-        window.copySellAdminId = () => {
-            const id = document.getElementById('admin-sell-id').textContent;
-            copyToClipboard(id, null, "Admin ID copied! Send items here.");
+        window.copyCoinAdminId = () => {
+            const id = document.getElementById('admin-coin-id').textContent;
+            copyToClipboard(id, null, "এডমিন আইডি সফল ভাবে কপি করা হয়েছে। এখন এই ইউজার নেম এ কয়েন পাঠিয়ে নিচের ফর্ম পূরণ করুন।");
         }
 
-        window.submitSellRequest = async () => {
-            const type = document.getElementById('sell-type-select').value;
+        window.submitCoinSell = async () => {
+            const type = document.getElementById('coin-type-select').value;
+            const amount = parseInt(document.getElementById('coin-amount').value);
+            const username = document.getElementById('coin-username').value;
+            const time = new Date().toLocaleString('en-GB'); // Auto Generated Time
+
+            if(!amount || amount < 500) return showAlert("Minimum 500 coins required.");
+            if(!username) return showAlert("Please enter your username.");
+
             const config = sellConfig[type];
-            let details = '';
-            let expectedPrice = 0;
+            const expectedPrice = (amount / 1000) * config.rate;
 
-            if (currentSellCategory === 'coin') {
-                const amount = parseInt(document.getElementById('coin-amount').value);
-                const username = document.getElementById('coin-username').value;
-                if (!amount || amount < 500) return showAlert("Minimum 500 coins.");
-                if (!username) return showAlert("Sender username required.");
-                
-                // Rate calc: (Amount / 1000) * Rate (since unit is 1K)
-                expectedPrice = (amount / 1000) * config.rate;
-                details = `Amount: ${amount} | Sender: ${username}`;
-            } else {
-                const email = document.getElementById('acc-email').value;
-                const pass = document.getElementById('acc-pass').value;
-                const twofa = document.getElementById('acc-2fa').value;
-                if (!email || !pass) return showAlert("Email & Password required.");
-                
-                // Rate calc: 1 * Rate (since unit is 1 Pc)
-                expectedPrice = config.rate;
-                details = `E: ${email}\nP: ${pass}\n2FA: ${twofa}`;
-            }
+            const details = `Sent: ${amount} | User: ${username} | Time: ${time}`;
 
-            const time = document.getElementById('sell-time-auto').value;
-            details += `\nTime: ${time}`;
+            await submitSellRequestGeneral(`Coin: ${type}`, details, expectedPrice, 'coin');
+        }
 
-            loader.style.display = 'flex';
+        window.submitAccountSell = async () => {
+            const email = document.getElementById('acc-email').value;
+            const pass = document.getElementById('acc-pass').value;
+            const recovery = document.getElementById('acc-recovery').value;
+            const price = parseFloat(document.getElementById('acc-price').value);
+
+            if(!email || !pass || !price) return showAlert("Fill all fields.");
+
+            const details = `E: ${email}\nP: ${pass}\nR/2FA: ${recovery}`;
+            
+            await submitSellRequestGeneral("Account Sell", details, price, 'account');
+        }
+
+        async function submitSellRequestGeneral(product, details, price, category) {
+             loader.style.display = 'flex';
              try {
                 await addDoc(collection(db, "sell_requests"), {
                     userId: userData.tgChatId,
                     userName: userData.name,
-                    product: `${type} ${currentSellCategory.toUpperCase()}`,
+                    product,
                     details,
-                    price: expectedPrice,
-                    category: currentSellCategory,
+                    price,
+                    category,
                     status: 'pending',
                     createdAt: serverTimestamp()
                 });
                 showAlert("Request Submitted! Wait for Admin approval.");
                 closeSellForm();
                 loadSellHistory();
+                
+                // Clear inputs
+                document.querySelectorAll('input').forEach(i => i.value = '');
              } catch (e) { showAlert("Error submitting."); console.error(e); }
              finally { loader.style.display = 'none'; }
         }
